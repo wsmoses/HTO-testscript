@@ -6,11 +6,20 @@ REPEAT="${REPEAT:-10}"
 mkdir results
 RESULTS="`pwd`/results"
 
+git clone --depth 1 git://sourceware.org/git/binutils-gdb.git binutils
+cd binutils
+BININC="`pwd`/include"
+mkdir build
+cd build
+../configure --enable-gold --enable-plugins --disable-werror
+make -j$CORES
+cd ../..
+
 git clone https://github.com/wsmoses/LLVM-HTO -b manglecpp --depth 1
 cd LLVM-HTO
 mkdir build
 cd build
-cmake ../llvm -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="X86"
+cmake ../llvm -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_USE_LINKER=gold -DLLVM_BINUTILS_INCDIR="$BININC"
 make -j$CORES
 export CC="`pwd`/bin/clang"
 export CXX="`pwd`/bin/clang++"
@@ -29,7 +38,7 @@ cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" 
 make -j$CORES -i
 
 for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/plain$i.txt;
+    $LIT -v -j 1 -o $RESULTS/plain$i.txt ./MultiSource;
 done
 cd ../..
 
@@ -41,7 +50,7 @@ cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" 
 make -j$CORES -i
 
 for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/hto$i.txt;
+    $LIT -v -j 1 -o $RESULTS/hto$i.txt ./MultiSource;
 done
 cd ../..
 
@@ -54,7 +63,7 @@ cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/
 make -j$CORES -i
 
 for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/thinlto$i.txt;
+    $LIT -v -j 1 -o $RESULTS/thinlto$i.txt ./MultiSource;
 done
 cd ../..
 
@@ -66,7 +75,7 @@ cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/
 make -j$CORES -i
 
 for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/fulllto$i.txt;
+    $LIT -v -j 1 -o $RESULTS/fulllto$i.txt ./MultiSource;
 done
 cd ../..
 
