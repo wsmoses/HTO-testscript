@@ -37,8 +37,8 @@ cd build
 cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/Release.cmake
 make -j$CORES -i
 
-for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/plain$i.txt ./MultiSource;
+for i in $(seq 1 $REPEAT); do
+    $LIT -v -j 1 -o $RESULTS/plain$i.txt ./MultiSource || true;
 done
 cd ../..
 
@@ -49,8 +49,8 @@ cd build
 cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/Release.cmake
 make -j$CORES -i
 
-for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/hto$i.txt ./MultiSource;
+for i in $(seq 1 $REPEAT); do
+    $LIT -v -j 1 -o $RESULTS/hto$i.txt ./MultiSource || true;
 done
 cd ../..
 
@@ -62,20 +62,20 @@ cd build
 cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseThinLTO.cmake
 make -j$CORES -i
 
-for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/thinlto$i.txt ./MultiSource;
+for i in $(seq 1 $REPEAT); do
+    $LIT -v -j 1 -o $RESULTS/thinlto$i.txt ./MultiSource || true;
 done
 cd ../..
 
-git clone git@github.com:wsmoses/HTO-test-suite thinlto -b lto --depth 1
-cd thinlto
+git clone git@github.com:wsmoses/HTO-test-suite fulllto -b lto --depth 1
+cd fulllto
 mkdir build
 cd build
 cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseLTO.cmake
 make -j$CORES -i
 
-for i in {1..$REPEAT}; do
-    $LIT -v -j 1 -o $RESULTS/fulllto$i.txt ./MultiSource;
+for i in $(seq 1 $REPEAT); do
+    $LIT -v -j 1 -o $RESULTS/fulllto$i.txt ./MultiSource || true;
 done
 cd ../..
 
