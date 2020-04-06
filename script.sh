@@ -38,7 +38,7 @@ cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" 
 make -j$CORES -i
 
 for i in $(seq 1 $REPEAT); do
-    $LIT -v -j 1 -o $RESULTS/plain$i.txt ./MultiSource || true;
+    $LIT -v -j 1 -o $RESULTS/plain$i.json ./MultiSource || true;
 done
 cd ../..
 
@@ -47,10 +47,10 @@ cd hto
 mkdir build
 cd build
 cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/Release.cmake
-make -j$CORES -i
+make -j$CORES -i | tee errs.txt
 
 for i in $(seq 1 $REPEAT); do
-    $LIT -v -j 1 -o $RESULTS/hto$i.txt ./MultiSource || true;
+    $LIT -v -j 1 -o $RESULTS/hto$i.json ./MultiSource || true;
 done
 cd ../..
 
@@ -63,7 +63,7 @@ cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/
 make -j$CORES -i
 
 for i in $(seq 1 $REPEAT); do
-    $LIT -v -j 1 -o $RESULTS/thinlto$i.txt ./MultiSource || true;
+    $LIT -v -j 1 -o $RESULTS/thinlto$i.json ./MultiSource || true;
 done
 cd ../..
 
@@ -75,7 +75,7 @@ cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/
 make -j$CORES -i
 
 for i in $(seq 1 $REPEAT); do
-    $LIT -v -j 1 -o $RESULTS/fulllto$i.txt ./MultiSource || true;
+    $LIT -v -j 1 -o $RESULTS/fulllto$i.json ./MultiSource || true;
 done
 cd ../..
 
