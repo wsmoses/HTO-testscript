@@ -1,6 +1,6 @@
 set -e
 
-CORES="${CORES:-10}"
+CORES="${CORES:-15}"
 REPEAT="${REPEAT:-10}"
 
 mkdir results
@@ -34,7 +34,7 @@ git clone git@github.com:wsmoses/HTO-test-suite forheaders -b annotate --depth 1
 cd forheaders
 mkdir build
 cd build
-cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/Release.cmake
+cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 make -j$CORES -i
 
 for i in $(seq 1 $REPEAT); do
@@ -46,7 +46,7 @@ git clone git@github.com:wsmoses/HTO-test-suite hto -b fastbuild --depth 1
 cd hto
 mkdir build
 cd build
-cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/Release.cmake
+cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 make -j$CORES -i | tee errs.txt
 
 for i in $(seq 1 $REPEAT); do
