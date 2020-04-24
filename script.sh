@@ -79,4 +79,15 @@ for i in $(seq 1 $REPEAT); do
 done
 cd ../..
 
+git clone git@github.com:wsmoses/HTO-test-suite noheaders -b noannotate --depth 1
+cd noheaders
+mkdir build
+cd build
+cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
+make -j$CORES -i
+
+for i in $(seq 1 $REPEAT); do
+    $LIT -v -j 1 -o $RESULTS/noheaders$i.json ./MultiSource || true;
+done
+cd ../..
 
