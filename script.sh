@@ -1,6 +1,6 @@
 set -e
 
-CORES="${CORES:-15}"
+CORES="${CORES:-32}"
 REPEAT="${REPEAT:-10}"
 
 mkdir results
@@ -19,7 +19,7 @@ git clone https://github.com/wsmoses/LLVM-HTO -b manglecpp --depth 1
 cd LLVM-HTO
 mkdir build
 cd build
-cmake ../llvm -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_USE_LINKER=gold -DLLVM_BINUTILS_INCDIR="$BININC"
+cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_USE_LINKER=gold -DLLVM_BINUTILS_INCDIR="$BININC"
 make -j$CORES
 export CC="`pwd`/bin/clang"
 export CXX="`pwd`/bin/clang++"
