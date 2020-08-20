@@ -33,7 +33,7 @@ mkdir $SUITE
 git clone git@github.com:wsmoses/HTO-test-suite forheaders -b annotate --depth 1
 cd forheaders
 
-for i in $(seq 1 $REPEAT); do
+for i in $(seq 1 1); do
 	rm -rf build
 	mkdir build
 	cd build
