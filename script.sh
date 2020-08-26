@@ -33,11 +33,11 @@ mkdir $SUITE
 git clone git@github.com:wsmoses/HTO-test-suite forheaders -b annotate --depth 1
 cd forheaders
 
-for i in $(seq 1 $REPEAT); do
+for i in $(seq 1 1); do
 	rm -rf build
 	mkdir build
 	cd build
-	cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
+	cmake -DLARGE_PROBLEM_SIZE=1 .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 	make -i
     $LIT -v -j 1 -o $RESULTS/plain$i.json ./MultiSource || true;
 	cd ..
@@ -51,7 +51,7 @@ for i in $(seq 1 $REPEAT); do
 rm -rf build
 	mkdir build
 cd build
-cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
+cmake .. -DLARGE_PROBLEM_SIZE=1 -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 make -i | tee errs.txt
     $LIT -v -j 1 -o $RESULTS/hto$i.json ./MultiSource || true;
 cd ..
@@ -66,7 +66,7 @@ for i in $(seq 1 $REPEAT); do
 rm -rf build
 	mkdir build
 cd build
-cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseThinLTO.cmake
+cmake .. -DLARGE_PROBLEM_SIZE=1 -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseThinLTO.cmake
 make -i
     $LIT -v -j 1 -o $RESULTS/thinlto$i.json ./MultiSource || true;
 cd ..
@@ -80,7 +80,7 @@ for i in $(seq 1 $REPEAT); do
 rm -rf build
 	mkdir build
 cd build
-cmake .. -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseLTO.cmake
+cmake .. -DLARGE_PROBLEM_SIZE=1 -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseLTO.cmake
 make -i
     $LIT -v -j 1 -o $RESULTS/fulllto$i.json ./MultiSource || true;
 cd ..
@@ -94,7 +94,7 @@ for i in $(seq 1 $REPEAT); do
 rm -rf build
 	mkdir build
 cd build
-cmake .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
+cmake .. -DLARGE_PROBLEM_SIZE=1 -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 make -j$CORES -i
     $LIT -v -j 1 -o $RESULTS/noheaders$i.json ./MultiSource || true;
 cd ..
