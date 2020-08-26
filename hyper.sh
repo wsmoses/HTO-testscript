@@ -16,3 +16,9 @@ sudo apt purge snapd -y
 sudo systemctl mask unattended-upgrades.service
 sudo systemctl stop unattended-upgrades.service
 
+sudo systemctl mask accounts-daemon.service
+sudo systemctl stop accounts-daemon.service
+
+sudo systemctl mask networkd-dispatcher.service
+sudo systemctl stop networkd-dispatcher.service
+
