@@ -5,3 +5,6 @@ for i in {18..35}; do
 done
 
 echo "1" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
+
+sudo systemctl mask snapd.service
+sudo killall snapd
