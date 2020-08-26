@@ -8,3 +8,11 @@ echo "1" | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo
 
 sudo systemctl mask snapd.service
 sudo killall snapd
+sudo systemctl mask amazon-ssm-agent
+sudo killall amazon-ssm-agent
+
+sudo apt purge snapd -y
+
+sudo systemctl mask unattended-upgrades.service
+sudo systemctl stop unattended-upgrades.service
+
