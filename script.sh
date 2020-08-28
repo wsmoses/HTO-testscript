@@ -3,8 +3,8 @@ set -e
 CORES="${CORES:-24}"
 REPEAT="${REPEAT:-10}"
 
-TESTS=" 453.povray 429.mcf 462.libquantum 456.hmmer 470.lbm 473.astar 444.namd 445.gobmk 458.sjeng 400.perlbench 483.xalancbmk 450.soplex 464.h264ref 482.sphinx3 433.milc"
-EXTRA=" -DTEST_SUITE_EXTERNALS_DIR=$HOME -DTEST_SUITE_RUN_TYPE=ref -DTEST_SUITE_ARCH_FLAGS='-march=native'"
+TESTS="em3d Reductions-flt InductionVariable-dbl unix-smail make_dparser StatementReordering-dbl LinearDependence-dbl imp bintr life assembler garage CrossingThresholds-flt archie allroots np security-sha LoopRestructuring-flt paq8p Searching-flt hexxagon iotest bc gs mpeg2decode cjpeg simul frame_layout bullet CrossingThresholds-dbl Symbolics-dbl automotive-basicmath GlobalDataFlow-flt AMGmk PathFinder miniFE deriv2 sim fsm objects city ControlFlow-dbl oggenc rawcaudio gnugo telecomm-adpcm CoMD alacconvert-encode unix-tbl enc-rc4 SimpleMOC NodeSplitting-dbl security-rijndael lambda consumer-typeset smg2000 cdecl IndirectAddressing-dbl ks telecomm-CRC32 anagram ControlLoops-dbl IndirectAddressing-flt Recurrences-flt consumer-lame is ecbdes main nbench automotive-susan StatementReordering-flt spiff enc-3des football LoopRerolling-dbl encode aha telecomm-fft automotive-bitcount ocean vor fixoutput clamscan deriv1 Recurrences-dbl trees backprop Equivalencing-flt consumer-jpeg Packing-dbl plot2fig pathfinder hbd network-patricia Reductions-dbl NodeSplitting-flt dbms network-dijkstra tramp3d-v4 SIBsim4 lua LoopRerolling-flt family treecc ControlFlow-flt power bisect telecomm-gsm mybison toast uuencode hotspot InductionVariable-flt rsbench shapes SPASS pairlocalalign drop3 eks rawdaudio security-blowfish PENNANT kc testtrie Expansion-dbl srad alacconvert-decode CrystalMk five11 CLAMR treeadd trie yacr2 HPCCG agrep XSBench Packing-flt 7zip-benchmark 8b10b Expansion-flt employ Symbolics-flt qbsort office-stringsearch vcirc HACCKernels GlobalDataFlow-dbl LoopRestructuring-dbl ControlLoops-flt office burg Searching-dbl uudecode fhourstones miniGMG office-ispell primes LinearDependence-flt siod Equivalencing-dbl espresso"
+EXTRA=""
 
 mkdir results
 RESULTS="`pwd`/results"
