@@ -9,6 +9,7 @@ EXTRA=""
 mkdir results
 RESULTS="`pwd`/results"
 
+if false; then
 git clone --depth 1 git://sourceware.org/git/binutils-gdb.git binutils
 git clone https://github.com/wsmoses/LLVM-HTO -b rebasev2 --depth 1
 #git clone https://github.com/wsmoses/LLVM-HTO -b manglecpp --depth 1
@@ -32,11 +33,12 @@ mkdir build
 cd build
 cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_USE_LINKER=gold -DLLVM_BINUTILS_INCDIR="$BININC"
 make -j$CORES
+cd ../..
+fi
+
 export CC="$HOME/muslpfx/bin/musl-clang"
 export CXX="$HOME/muslpfx/bin/musl-clang++"
-LIT="`pwd`/bin/llvm-lit"
-cd ../..
-
+LIT="`pwd`/LLVM-HTO/build/bin/llvm-lit"
 SUITE="`pwd`/suite"
 
 mkdir $SUITE
