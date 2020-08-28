@@ -17,7 +17,7 @@ git clone git@github.com:wsmoses/HTO-test-suite fulllto -b lto --depth 1
 git clone git@github.com:wsmoses/HTO-test-suite forheaders -b annotate --depth 1
 git clone git@github.com:wsmoses/HTO-test-suite thinlto -b lto --depth 1
 git clone git@github.com:wsmoses/HTO-test-suite noheaders -b noannotate --depth 1
-git clone git@github.com:wsmoses/HTO-test-suite hto -b fastbuild --depth 1
+git clone git@github.com:wsmoses/HTO-test-suite hto -b htomusl --depth 1
 
 cd binutils
 BININC="`pwd`/include"
@@ -32,8 +32,8 @@ mkdir build
 cd build
 cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_TARGETS_TO_BUILD="X86" -DLLVM_USE_LINKER=gold -DLLVM_BINUTILS_INCDIR="$BININC"
 make -j$CORES
-export CC="`pwd`/bin/clang"
-export CXX="`pwd`/bin/clang++"
+export CC="$HOME/muslpfx/bin/musl-clang"
+export CXX="$HOME/muslpfx/bin/musl-clang++"
 LIT="`pwd`/bin/llvm-lit"
 cd ../..
 
