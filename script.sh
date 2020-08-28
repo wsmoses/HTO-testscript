@@ -32,7 +32,7 @@ export CXX="$HOME/muslpfx/bin/musl-clang++"
 LIT="`pwd`/bin/llvm-lit"
 cd ../..
 
-git clone git@github.com:wsmoses/HTO-test-suite hto -b fastbuild --depth 1
+git clone git@github.com:wsmoses/HTO-test-suite hto -b htomusl --depth 1
 cd hto
 
 for i in $(seq 1 $REPEAT); do
