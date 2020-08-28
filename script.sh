@@ -48,7 +48,7 @@ for i in $(seq 1 1); do
 	cd build
 	cmake -DLARGE_PROBLEM_SIZE=1 $EXTRA .. -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 	taskset -c 1-1 numactl -i all make -i $TESTS
-    	taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/plain$i.json ./MultiSource || true;
+    	taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/plain$i.json ./External || true;
 	cd ..
 done
 cd ..
@@ -65,7 +65,7 @@ rm -rf build
 cd build
 cmake .. -DLARGE_PROBLEM_SIZE=1 $EXTRA -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 taskset -c 1-1 numactl -i all make -i $TESTS | tee errs.txt
-taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/hto$i.json ./MultiSource || true;
+taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/hto$i.json ./External || true;
 cd ..
 done
 cd ..
@@ -79,7 +79,7 @@ rm -rf build
 cd build
 cmake .. -DLARGE_PROBLEM_SIZE=1 $EXTRA -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseThinLTO.cmake
 taskset -c 1-1 numactl -i all make -i $TESTS
-taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/thinlto$i.json ./MultiSource || true;
+taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/thinlto$i.json ./External || true;
 cd ..
 done
 cd ..
@@ -91,7 +91,7 @@ rm -rf build
 cd build
 cmake .. -DLARGE_PROBLEM_SIZE=1 $EXTRA -DSUITEDIR=$SUITE -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseNoLTO.cmake
 taskset -c 1-1 numactl -i all make -i $TESTS
-taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/noheaders$i.json ./MultiSource || true;
+taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/noheaders$i.json ./External || true;
 cd ..
 done
 cd ..
@@ -104,7 +104,7 @@ rm -rf build
 cd build
 cmake .. -DLARGE_PROBLEM_SIZE=1 $EXTRA -DCMAKE_C_COMPILER="$CC" -DCMAKE_CXX_COMPILER="$CXX" -C../cmake/caches/ReleaseLTO.cmake
 taskset -c 1-1 numactl -i all make -i $TESTS
-taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/fulllto$i.json ./MultiSource || true;
+taskset -c 1-8 numactl -i all $LIT -v -j 1 -o $RESULTS/fulllto$i.json ./External || true;
 cd ..
 done
 cd ..
