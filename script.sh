@@ -10,7 +10,7 @@ mkdir results
 RESULTS="`pwd`/results"
 
 git clone --depth 1 git://sourceware.org/git/binutils-gdb.git binutils
-git clone https://github.com/wsmoses/LLVM-HTO -b rebasev2 --depth 1
+git clone https://github.com/wsmoses/LLVM-HTO -b rebase2 --depth 1
 #git clone https://github.com/wsmoses/LLVM-HTO -b manglecpp --depth 1
 
 git clone git@github.com:wsmoses/HTO-test-suite fulllto -b lto --depth 1
