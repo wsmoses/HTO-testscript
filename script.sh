@@ -1,6 +1,6 @@
 set -e
 
-CORES="${CORES:-32}"
+CORES="${CORES:-24}"
 REPEAT="${REPEAT:-10}"
 
 TESTS=" 453.povray 429.mcf 462.libquantum 456.hmmer 470.lbm 473.astar 444.namd 445.gobmk 458.sjeng 400.perlbench 483.xalancbmk 450.soplex 464.h264ref 482.sphinx3 433.milc"
